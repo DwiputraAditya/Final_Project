@@ -50,6 +50,7 @@ public class AuthController {
                 .body(new UserInfoResponse("Status 200 OK",
                         "Login Sucsessfull",
                         authenticationResponse.getJwt()));
+
     }
 
     @PostMapping("/signup")
