@@ -57,7 +57,8 @@ public class AuthService {
 
         return new AuthenticationResponse(userDetails.getId(),
                 userDetails.getEmail(),
-                userDetails.getUsername(),
+                userDetails.getPassword(),
+                userDetails.getPhoneNumber(),
                 userDetails.getPassword(),
                 roles,
                 jwtCookie.getValue());

@@ -47,10 +47,8 @@ public class AuthController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, authenticationResponse.getJwt())
-                .body(new UserInfoResponse(authenticationResponse.getId(),
-                        authenticationResponse.getName(),
-                        authenticationResponse.getEmail(),
-                        authenticationResponse.getRoles(),
+                .body(new UserInfoResponse("Status 200 OK",
+                        "Login Sucsessfull",
                         authenticationResponse.getJwt()));
     }
 
