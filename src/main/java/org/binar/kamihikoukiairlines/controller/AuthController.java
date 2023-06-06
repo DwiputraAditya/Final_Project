@@ -51,6 +51,7 @@ public class AuthController {
                         "Login Sucsessfull",
                         authenticationResponse.getJwt()));
 
+
     }
 
     @PostMapping("/signup")
