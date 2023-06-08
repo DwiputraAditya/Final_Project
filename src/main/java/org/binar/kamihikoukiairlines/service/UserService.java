@@ -1,11 +1,14 @@
 package org.binar.kamihikoukiairlines.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.binar.kamihikoukiairlines.Exception.UserNotFoundException;
 import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
+import org.binar.kamihikoukiairlines.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,7 +44,6 @@ import java.util.Optional;
             user1.setName(user.getName());
             user1.setEmail(user.getEmail());
             user1.setPhoneNumber(user.getPhoneNumber());
-            user1.setPassword(user.getPassword());
             log.info("Update Data User Success");
             return userRepository.save(user1);
         }
@@ -49,4 +51,42 @@ import java.util.Optional;
         public void deleteUser(Long id) {
             userRepository.deleteById(id);
         }
+
+        public void changePassword(String email, String currentPassword, String newPassword) throws UserNotFoundException {
+            Users user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Pengguna dengan email tersebut tidak ditemukan"));
+            if (user == null) {
+                throw new UserNotFoundException("Pengguna dengan email tersebut tidak ditemukan");
+            }
+
+            if (!isPasswordValid(user, currentPassword)) {
+                new MessageResponse("Password saat ini tidak valid");
+            }
+
+            user.setPassword(encryptPassword(newPassword));
+            userRepository.save(user);
+        }
+
+        private boolean isPasswordValid(Users user, String password) {
+            // Logika untuk memeriksa apakah password yang diberikan cocok dengan password pengguna
+            // Misalnya, menggunakan algoritma hash seperti BCryptPasswordEncoder
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            return passwordEncoder.matches(password, user.getPassword());
+        }
+
+        private String encryptPassword(String password) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            return passwordEncoder.encode(password);
+        }
+
+//        public void resetPassword(String email, String newPassword, String confirmPassword) throws Exception {
+//            Users users = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Pengguna dengan email tersebut tidak ditemukan"));
+//
+//            if(!newPassword.equals(confirmPassword)){
+//                throw new PasswordMismatchException("Password Tidak Cocok!");
+//            }
+//
+//            users.setPassword(newPassword);
+//
+//            userRepository.save(users);
+//        }
     }
