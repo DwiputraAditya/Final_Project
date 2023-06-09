@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.binar.kamihikoukiairlines.dto.LoginRequest;
 import org.binar.kamihikoukiairlines.dto.SignupRequest;
 import org.binar.kamihikoukiairlines.jwt.AuthenticationResponse;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Auth", description = "Login Register Controller | contains : Login & Registrasi")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -43,7 +45,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@Valid @RequestBody LoginRequest loginRequest) {
-        AuthenticationResponse authenticationResponse = authService.authenticateUser(loginRequest);
+        AuthenticationResponse authenticationResponse = authService.loginUser(loginRequest);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, authenticationResponse.getJwt())
@@ -57,12 +59,5 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         authService.registerUser(signUpRequest);
         return ResponseEntity.ok(new MessageResponse("User Registered Successful"));
-    }
-
-    @PostMapping("/signout")
-    public ResponseEntity<?> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new MessageResponse("You've been signed out!"));
     }
 }

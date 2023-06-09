@@ -41,7 +41,7 @@ public class AuthService {
     JwtUtils jwtUtils;
 
 //    sign in
-    public AuthenticationResponse authenticateUser(LoginRequest loginRequest) {
+    public AuthenticationResponse loginUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 

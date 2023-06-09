@@ -2,6 +2,7 @@ package org.binar.kamihikoukiairlines.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.Exception.UserNotFoundException;
+import org.binar.kamihikoukiairlines.dto.EditProfileRequest;
 import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
 import org.binar.kamihikoukiairlines.response.MessageResponse;
@@ -21,25 +22,12 @@ import java.util.Optional;
         @Autowired
         UserRepository userRepository;
 
-        public List<Users> getAllUser(){
-            log.info("Get All Data User Success");
-            return userRepository.findAll();
-        }
-
-        public Page<Users> getAllUsersPagination(int page, int size) {
-            PageRequest request = PageRequest.of(page, size);
-            Page<Users> result = userRepository.findAll(request);
-            log.info("Get All Data User Pagination Success");
-            return result;
-        }
-
         public Optional<Users> getUserById(Long id) {
             log.info("Get Data User By Id Success");
             return userRepository.findById(id);
         }
 
-        @Transactional
-        public Users updateUser(Long id, Users user) {
+        public Users updateUser(Long id, EditProfileRequest user) {
             Users user1 = userRepository.findById(id).get();
             user1.setName(user.getName());
             user1.setEmail(user.getEmail());

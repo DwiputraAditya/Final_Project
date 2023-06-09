@@ -1,7 +1,6 @@
 package org.binar.kamihikoukiairlines.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,10 +32,6 @@ public class Users {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    /*@JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Booking> bookingList = new ArrayList<>();*/
 
     public Users(String name, String email, String phoneNumber, String password) {
         this.name = name;

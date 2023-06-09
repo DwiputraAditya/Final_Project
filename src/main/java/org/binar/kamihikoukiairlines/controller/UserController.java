@@ -1,39 +1,27 @@
 package org.binar.kamihikoukiairlines.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.binar.kamihikoukiairlines.dto.EditProfileRequest;
 import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/user")
+@Tag(name = "Users", description = "User Controller | contains : Get by Id, Update profile user, Delete user")
 public class UserController {
     @Autowired
     UserService userService;
 
-
-    @GetMapping("/getAllUser")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<Users> getAllUser(){
-        return userService.getAllUser();
-    }
-
-    @GetMapping("/getAllUserPagination")
-    @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
-    public Page<Users> getAllUsersPagination(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        return userService.getAllUsersPagination(page, size);
-    }
-
     @GetMapping("/getUserById/{userId}")
-    @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
+//    @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
     public ResponseEntity<Users> getUserById(@PathVariable(value = "userId") Long id) {
         Optional<Users> userData = userService.getUserById(id);
         if (userData.isPresent()) {
@@ -44,14 +32,14 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{userId}")
-    @PreAuthorize("hasRole('BUYER')")
-    public ResponseEntity<String> updateUser(@PathVariable(value = "userId") Long id, @RequestBody Users user){
+//    @PreAuthorize("hasRole('BUYER')")
+    public ResponseEntity<String> updateUser(@PathVariable(value = "userId") Long id, @RequestBody EditProfileRequest user){
         userService.updateUser(id,user);
         return new ResponseEntity<>("Data berhasil di update", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteUserById/{userId}")
-    @PreAuthorize("hasRole('BUYER')")
+//    @PreAuthorize("hasRole('BUYER')")
     public ResponseEntity<String> deleteUserById(@PathVariable(name = "userId") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok("Data Berhasil dihapus");

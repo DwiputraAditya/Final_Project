@@ -1,6 +1,7 @@
 package org.binar.kamihikoukiairlines.controller;
 
-import org.binar.kamihikoukiairlines.Exception.InvalidPasswordException;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.binar.kamihikoukiairlines.Exception.UserNotFoundException;
 import org.binar.kamihikoukiairlines.response.MessageResponse;
 import org.binar.kamihikoukiairlines.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/reset")
+@Tag(name = "Password", description = "Password Controller | contains : change password")
 public class ResetPasswordController {
     @Autowired
     UserService userService;

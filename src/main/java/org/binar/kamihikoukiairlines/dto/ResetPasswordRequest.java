@@ -1,10 +1,7 @@
 package org.binar.kamihikoukiairlines.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
+import lombok.Data;
+@Data
 public class ResetPasswordRequest {
     private String email;
     private String newPassword;
