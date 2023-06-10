@@ -18,5 +18,5 @@ public class Aircraft {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String aircraftCode;
+    private String aircraftName;
 }

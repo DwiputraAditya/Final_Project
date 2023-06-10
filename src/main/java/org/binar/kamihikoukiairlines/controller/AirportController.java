@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.controller;
 
+import org.binar.kamihikoukiairlines.dto.AirportRequest;
 import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.service.AircraftService;
 import org.binar.kamihikoukiairlines.service.AirportService;
@@ -23,8 +24,8 @@ public class AirportController {
     }
 
     @PostMapping("/addAirport")
-    public ResponseEntity<?> addAirport(@RequestBody Airport airport){
-        Airport addAirport = airportService.addAirport(airport);
+    public ResponseEntity<?> addAirport(@RequestBody AirportRequest airportRequest){
+        Airport addAirport = airportService.addAirport(airportRequest);
         return new ResponseEntity<>(addAirport, HttpStatus.CREATED);
     }
 

@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import org.binar.kamihikoukiairlines.dto.AirportRequest;
 import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,15 @@ public class AirportService {
         return airportRepository.findAll();
     }
 
-    public Airport addAirport(Airport airport){
+    public Airport addAirport(AirportRequest airportRequest){
+        Airport airport = new Airport();
+        airport.setAirportName(airportRequest.getAirportName());
+        airport.setAirportCode(airportRequest.getAirportCode());
+        airport.setCityName(airportRequest.getCityName());
+        airport.setCityCode(airportRequest.getCityCode());
+        airport.setCountryName(airportRequest.getCountryName());
+        airport.setCountryCode(airportRequest.getCountryCode());
+
         return airportRepository.save(airport);
     }
 

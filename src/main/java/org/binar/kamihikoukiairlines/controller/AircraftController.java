@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/aircraft")
 public class AircraftController {
@@ -16,8 +18,8 @@ public class AircraftController {
 
     @GetMapping("/getAllAircraft")
     public ResponseEntity<?> getAllAircraft(){
-        aircraftService.getAllAircraft();
-        return ResponseEntity.ok("Data Airport");
+        List<Aircraft> aircraft = aircraftService.getAllAircraft();
+        return ResponseEntity.ok(aircraft);
     }
 
     @PostMapping("/addAirport")

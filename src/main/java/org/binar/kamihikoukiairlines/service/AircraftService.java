@@ -7,6 +7,8 @@ import org.binar.kamihikoukiairlines.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AircraftService {
 
@@ -19,8 +21,8 @@ public class AircraftService {
     }
 
 
-    public void getAllAircraft() {
-        aircraftRepository.findAll();
+    public List<Aircraft> getAllAircraft() {
+        return aircraftRepository.findAll();
     }
 
     public Aircraft addAircraft(Aircraft aircraft){
@@ -29,7 +31,7 @@ public class AircraftService {
 
     public Aircraft updateAircraft(Long id, Aircraft aircraft){
         Aircraft pesawat = aircraftRepository.findById(id).get();
-        pesawat.setAircraftCode(aircraft.getAircraftCode());
+        pesawat.setAircraftName(aircraft.getAircraftName());
         return aircraftRepository.save(pesawat);
     }
 }
