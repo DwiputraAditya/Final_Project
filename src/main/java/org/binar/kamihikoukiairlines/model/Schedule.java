@@ -10,6 +10,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "schedule")
 public class Schedule {
     @Id
@@ -21,6 +22,11 @@ public class Schedule {
     private LocalTime arrivalTime;
     private String price;
     private String seatClass;
+
+    public enum FlightClass {
+        ECONOMY,
+        BUSINESS
+    }
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
     @JoinColumn(name = "route_id", referencedColumnName = "id")

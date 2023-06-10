@@ -60,10 +60,10 @@ public class WebSecurityConfig {
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                .antMatchers("/api/film/**").permitAll()
-                .antMatchers("/api/booking/**").permitAll()
+                .antMatchers("/api/route/**").permitAll()
+                .antMatchers("/api/airport/**").permitAll()
                 .antMatchers("/api/schedule/**").permitAll()
-                .antMatchers("/api/seats/**").permitAll()
+                .antMatchers("/api/aircraft/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/reset/**").permitAll()
                 .anyRequest().authenticated();

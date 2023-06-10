@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "route")
 public class Route {
@@ -24,6 +25,5 @@ public class Route {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
     @JoinColumn(name = "aircraft_id", referencedColumnName = "id")
-    private Aircraft aircraftDetail;
-
+    private Aircraft aircraft;
 }
