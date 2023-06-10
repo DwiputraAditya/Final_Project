@@ -65,16 +65,4 @@ import java.util.Optional;
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             return passwordEncoder.encode(password);
         }
-
-//        public void resetPassword(String email, String newPassword, String confirmPassword) throws Exception {
-//            Users users = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Pengguna dengan email tersebut tidak ditemukan"));
-//
-//            if(!newPassword.equals(confirmPassword)){
-//                throw new PasswordMismatchException("Password Tidak Cocok!");
-//            }
-//
-//            users.setPassword(newPassword);
-//
-//            userRepository.save(users);
-//        }
     }

@@ -66,6 +66,8 @@ public class WebSecurityConfig {
                 .antMatchers("/api/seats/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/reset/**").permitAll()
+                .antMatchers("/api/aircraft/**").permitAll()
+                .antMatchers("/api/airport/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

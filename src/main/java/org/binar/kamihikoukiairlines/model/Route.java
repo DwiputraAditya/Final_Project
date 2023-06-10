@@ -15,11 +15,11 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-    @JoinColumn(name = "departure_id", referencedColumnName = "id")
+    @JoinColumn(name = "departure", referencedColumnName = "airportName")
     private Airport departure;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-    @JoinColumn(name = "arrival_id", referencedColumnName = "id")
+    @JoinColumn(name = "arrival", referencedColumnName = "airportName")
     private Airport arrival;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
