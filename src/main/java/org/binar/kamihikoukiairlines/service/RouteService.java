@@ -6,14 +6,11 @@ import org.binar.kamihikoukiairlines.model.Route;
 import org.binar.kamihikoukiairlines.repository.AircraftRepository;
 import org.binar.kamihikoukiairlines.repository.AirportRepository;
 import org.binar.kamihikoukiairlines.repository.RouteRepository;
-import org.jfree.util.Rotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RouteService {
@@ -25,10 +22,6 @@ public class RouteService {
 
     @Autowired
     AircraftRepository aircraftRepository;
-
-    public List<Route> getAllRoute(){
-        return routeRepository.findAll();
-    }
 
     @Transactional
     public Route addRoute(Long departureAirportId, Long arrivalAirportId, Long aircraftId) throws Exception {
@@ -43,9 +36,38 @@ public class RouteService {
         route.setDeparture(departureAirport);
         route.setArrival(arrivalAirport);
         route.setAircraftDetail(aircraft);
-        // Set other properties from routeRequest
 
         return routeRepository.save(route);
+    }
+
+    public List<Route> getAllRoute(){
+        return routeRepository.findAll();
+    }
+
+    public Optional<Route> getRouteById(Long id) {
+        return routeRepository.findById(id);
+    }
+
+    public Route updateRoute(Long routeId, Long departureAirportId, Long arrivalAirportId, Long aircraftId) throws Exception {
+        Route route = routeRepository.findById(routeId)
+                .orElseThrow(() -> new Exception("Route not found with ID: " + routeId));
+
+        Airport departureAirport = airportRepository.findById(departureAirportId)
+                .orElseThrow(() -> new Exception("Departure airport not found with ID: " + departureAirportId));
+        Airport arrivalAirport = airportRepository.findById(arrivalAirportId)
+                .orElseThrow(() -> new Exception("Arrival airport not found with ID: " + arrivalAirportId));
+        Aircraft aircraft = aircraftRepository.findById(aircraftId)
+                .orElseThrow(() -> new Exception("Aircraft not found with ID: " + aircraftId));
+
+        route.setDeparture(departureAirport);
+        route.setArrival(arrivalAirport);
+        route.setAircraftDetail(aircraft);
+
+        return routeRepository.save(route);
+    }
+
+    public void deletRoute(Long id) {
+        airportRepository.deleteById(id);
     }
 }
 

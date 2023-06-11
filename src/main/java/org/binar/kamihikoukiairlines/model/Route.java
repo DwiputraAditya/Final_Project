@@ -1,6 +1,5 @@
 package org.binar.kamihikoukiairlines.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;

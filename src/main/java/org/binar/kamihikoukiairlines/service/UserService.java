@@ -7,13 +7,10 @@ import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
 import org.binar.kamihikoukiairlines.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
     @Service
@@ -40,6 +37,7 @@ import java.util.Optional;
             userRepository.deleteById(id);
         }
 
+        @Transactional
         public void changePassword(String email, String currentPassword, String newPassword) throws UserNotFoundException {
             Users user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Pengguna dengan email tersebut tidak ditemukan"));
             if (user == null) {
@@ -54,11 +52,10 @@ import java.util.Optional;
             userRepository.save(user);
         }
 
-        private boolean isPasswordValid(Users user, String password) {
-            // Logika untuk memeriksa apakah password yang diberikan cocok dengan password pengguna
-            // Misalnya, menggunakan algoritma hash seperti BCryptPasswordEncoder
+        @Transactional
+        public boolean isPasswordValid(Users user, String password) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            return passwordEncoder.matches(password, user.getPassword());
+            return passwordEncoder.matches(user.getPassword(), password);
         }
 
         private String encryptPassword(String password) {

@@ -20,9 +20,13 @@ public class Booking {
     private Users users;
     @OneToOne(cascade = CascadeType.ALL)
     private Schedule schedule;
+
+    /*@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
+    @Column(name = "passenger")
+    private List<Passenger> passengersList = new ArrayList<>();*/
     private String bookingCode;
     private String paymentMethod;
     private boolean isSuccess;
     private boolean isValid;
-
 }

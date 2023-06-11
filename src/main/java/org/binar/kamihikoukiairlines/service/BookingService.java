@@ -1,16 +1,13 @@
 package org.binar.kamihikoukiairlines.service;
 
 import org.binar.kamihikoukiairlines.model.Booking;
-import org.binar.kamihikoukiairlines.model.Route;
 import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.repository.BookingRepository;
 import org.binar.kamihikoukiairlines.repository.ScheduleRepository;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +25,7 @@ public class BookingService {
     private UserRepository userRepository;
 
 
-    public List<Booking> getAllRoute(){
+    public List<Booking> getAllBooking(){
         return bookingRepository.findAll();
     }
 
@@ -40,7 +37,6 @@ public class BookingService {
                 .orElseThrow(() -> new Exception("Route not found"));
 
         Booking booking = new Booking();
-        // Set other properties of the booking as needed
         booking.setUsers(users);
         booking.setSchedule(schedule);
         booking.setBookingCode(generateBookingCode());
@@ -54,4 +50,5 @@ public class BookingService {
     private String generateBookingCode() {
         return UUID.randomUUID().toString().replace("-", "").substring(0, 10);
     }
+
 }

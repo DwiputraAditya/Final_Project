@@ -45,4 +45,8 @@ public class AirportService {
         tempat.setCityName(airport.getCityName());
         return airportRepository.save(tempat);
     }
+
+    public void deletAirport(Long id) {
+        airportRepository.deleteById(id);
+    }
 }

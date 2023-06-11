@@ -1,9 +1,7 @@
 package org.binar.kamihikoukiairlines.service;
 
 import org.binar.kamihikoukiairlines.model.Aircraft;
-import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.repository.AircraftRepository;
-import org.binar.kamihikoukiairlines.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +31,9 @@ public class AircraftService {
         Aircraft pesawat = aircraftRepository.findById(id).get();
         pesawat.setAircraftName(aircraft.getAircraftName());
         return aircraftRepository.save(pesawat);
+    }
+
+    public void deleteAircraft(Long id) {
+        aircraftRepository.deleteById(id);
     }
 }

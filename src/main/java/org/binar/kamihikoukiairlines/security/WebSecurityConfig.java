@@ -18,7 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-//@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
@@ -58,14 +57,11 @@ public class WebSecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                .antMatchers("/api/film/**").permitAll()
                 .antMatchers("/api/booking/**").permitAll()
                 .antMatchers("/api/schedule/**").permitAll()
-                .antMatchers("/api/seats/**").permitAll()
+                .antMatchers("/api/passenger/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/reset/**").permitAll()
                 .antMatchers("/api/aircraft/**").permitAll()
                 .antMatchers("/api/airport/**").permitAll()
                 .antMatchers("/api/route/**").permitAll()

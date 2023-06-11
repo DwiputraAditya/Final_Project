@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/booking")
+@Tag(name = "Booking", description = "Booking Controller | contains : Add Booking, Get All Booking")
 public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping
+    @GetMapping("/getAllBooking")
     public List<Booking> getAllBooking(){
-        return bookingService.getAllRoute();
+        return bookingService.getAllBooking();
     }
-    @PostMapping
+
+    @PostMapping("/addBooking")
     public ResponseEntity<Booking> bookTicket(@RequestParam("user_id") Long userId,
                                               @RequestParam("schedule_id") Long scheduleId,
                                               @RequestParam("payment") String paymenMethod) {
@@ -31,4 +34,5 @@ public class BookingController {
                     .body(null);
         }
     }
+
 }
