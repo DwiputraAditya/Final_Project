@@ -5,10 +5,13 @@ import org.binar.kamihikoukiairlines.dto.ScheduleRequest;
 import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,4 +46,17 @@ public class ScheduleController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<Schedule>> searchFlightWithoutArrival(@RequestParam("departure") String departure,
+                                                                     @RequestParam("arrival") String arrival,
+                                                                     @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                                                     @RequestParam("seatClass") String seatClass,
+                                                                     @RequestParam(value = "page", defaultValue = "0") int page,
+                                                                     @RequestParam(value = "size", defaultValue = "10") int size){
+        Page<Schedule> flights = scheduleService.searchFlightWithoutArrival(departure, arrival, date, seatClass, page, size);
+        return ResponseEntity.ok(flights);
+    }
+
+
 }

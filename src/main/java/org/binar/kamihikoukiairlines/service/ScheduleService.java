@@ -1,14 +1,20 @@
 package org.binar.kamihikoukiairlines.service;
 
 import org.binar.kamihikoukiairlines.dto.ScheduleRequest;
+import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.model.Route;
 import org.binar.kamihikoukiairlines.model.Schedule;
+import org.binar.kamihikoukiairlines.repository.AirportRepository;
 import org.binar.kamihikoukiairlines.repository.RouteRepository;
 import org.binar.kamihikoukiairlines.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +26,9 @@ public class ScheduleService {
 
     @Autowired
     ScheduleRepository scheduleRepository;
+
+    @Autowired
+    AirportRepository airportRepository;
 
 
     @Transactional
@@ -46,5 +55,11 @@ public class ScheduleService {
 
     public Optional<Schedule> getScheduleById(Long id) {
         return scheduleRepository.findById(id);
+    }
+
+    public Page<Schedule> searchFlightWithoutArrival(String departure, String arrival, LocalDate date, String seatClass, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return scheduleRepository.findByDepartureAndArrivalAndDepartureDateAndSeatClass(departure, arrival, date, seatClass, pageable);
     }
 }
