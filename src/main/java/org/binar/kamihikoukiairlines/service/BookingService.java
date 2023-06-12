@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import org.binar.kamihikoukiairlines.dto.PaymentDTO;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.model.Users;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.webjars.NotFoundException;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,20 +34,45 @@ public class BookingService {
     }
 
     @Transactional
-    public Booking bookTicket(Long userId, Long scheduleId, String paymenMethod) throws Exception {
+    public Booking bookTicket(Long userId, Long scheduleId) throws Exception {
         Users users = userRepository.findById(userId)
                 .orElseThrow(() -> new Exception("Route not found"));
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new Exception("Route not found"));
 
+        LocalDateTime dueDate = LocalDateTime.now().plusHours(2);
         Booking booking = new Booking();
         booking.setUsers(users);
         booking.setSchedule(schedule);
         booking.setBookingCode(generateBookingCode());
-        booking.setPaymentMethod(paymenMethod);
-        booking.setSuccess(false);
-        booking.setValid(true);
+        booking.setDueValid(dueDate);
+        booking.setIsSuccess(false);
+        booking.setIsValid(true);
 
+        return bookingRepository.save(booking);
+    }
+
+    public Booking payment(PaymentDTO paymentDTO) {
+        Booking booking = bookingRepository.findById(paymentDTO.getBookingId()).orElseThrow(() -> {
+            throw new NotFoundException("Booking Id Not Found");
+        });
+
+        if (Boolean.TRUE.equals(booking.getIsSuccess())){
+            HashMap<String, String> errorMessage = new HashMap<>();
+            errorMessage.put("ERROR", "booking with "+booking.getBookingCode() + " code has successfully paid");
+            throw new RuntimeException(String.valueOf(errorMessage));
+        }else {
+            if (LocalDateTime.now().isAfter(booking.getDueValid())) {
+                booking.setIsValid(false);
+                HashMap<String, String> errorMessage = new HashMap<>();
+                errorMessage.put("ERROR", "booking code is invalid");
+                throw new RuntimeException(String.valueOf(errorMessage));
+            }else {
+                booking.setIsSuccess(true);
+                booking.setIsValid(false);
+                booking.setPaymentMethod(paymentDTO.getPaymentMethod());
+            }
+        }
         return bookingRepository.save(booking);
     }
 

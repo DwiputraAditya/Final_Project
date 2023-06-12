@@ -13,7 +13,5 @@ public class BookingRequest {
     private Users users;
     @NotBlank
     private Schedule scheduleId;
-    @NotBlank
-    private String paymentMethod;
 
 }

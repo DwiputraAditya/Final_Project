@@ -22,7 +22,7 @@ public class Passenger {
     private String passport;
     private String countryOfPublication;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-    @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 }
