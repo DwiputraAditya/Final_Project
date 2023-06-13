@@ -3,9 +3,11 @@ package org.binar.kamihikoukiairlines.service;
 import org.binar.kamihikoukiairlines.dto.PaymentDTO;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.model.Schedule;
+import org.binar.kamihikoukiairlines.model.TransactionHistory;
 import org.binar.kamihikoukiairlines.model.Users;
 import org.binar.kamihikoukiairlines.repository.BookingRepository;
 import org.binar.kamihikoukiairlines.repository.ScheduleRepository;
+import org.binar.kamihikoukiairlines.repository.TransactionHistoryRepository;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,8 @@ public class BookingService {
     private ScheduleRepository scheduleRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TransactionHistoryRepository transactionHistoryRepository;
 
 
     public List<Booking> getAllBooking(){
@@ -49,7 +53,15 @@ public class BookingService {
         booking.setIsSuccess(false);
         booking.setIsValid(true);
 
-        return bookingRepository.save(booking);
+        bookingRepository.save(booking);
+
+        TransactionHistory transactionHistory = new TransactionHistory();
+        transactionHistory.setUsers(users);
+        transactionHistory.setBooking(booking);
+        transactionHistory.setTransactionDate(LocalDateTime.now());
+        transactionHistoryRepository.save(transactionHistory);
+
+        return booking;
     }
 
     public Booking payment(PaymentDTO paymentDTO) {
