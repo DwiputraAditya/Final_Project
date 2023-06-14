@@ -3,14 +3,12 @@ package org.binar.kamihikoukiairlines.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.binar.kamihikoukiairlines.dto.PassengerRequest;
 import org.binar.kamihikoukiairlines.model.Passenger;
+import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,11 @@ public class PassengerController {
 
     @Autowired
     PassengerService passengerService;
+
+    @GetMapping
+    public List<Passenger> getALlSchedule(){
+        return passengerService.getAllPassenger();
+    }
 
     @PostMapping("/addPassenger")
     public ResponseEntity<?> addPassenger(@RequestBody PassengerRequest passengerRequest) {

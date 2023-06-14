@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.PassengerRequest;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.model.Passenger;
+import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.repository.BookingRepository;
 import org.binar.kamihikoukiairlines.repository.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class PassengerService {
     PassengerRepository passengerRepository;
     @Autowired
     BookingRepository bookingRepository;
+
+
+    public List<Passenger> getAllPassenger() {
+        return passengerRepository.findAll();
+    }
 
     @Transactional
     public Passenger addPassenger(PassengerRequest passenger) throws Exception{

@@ -1,6 +1,5 @@
 package org.binar.kamihikoukiairlines.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.PaymentDTO;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.model.Schedule;
@@ -9,8 +8,9 @@ import org.binar.kamihikoukiairlines.repository.BookingRepository;
 import org.binar.kamihikoukiairlines.repository.ScheduleRepository;
 import org.binar.kamihikoukiairlines.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.webjars.NotFoundException;
 
 import java.time.LocalDateTime;
@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-@Service
-@Slf4j
+@RestController
+@RequestMapping("/api/booking")
 public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
@@ -36,9 +36,9 @@ public class BookingService {
     @Transactional
     public Booking bookTicket(Long userId, Long scheduleId) throws Exception {
         Users users = userRepository.findById(userId)
-                .orElseThrow(() -> new Exception("User Id Not Found"));
+                .orElseThrow(() -> new Exception("Route not found"));
         Schedule schedule = scheduleRepository.findById(scheduleId)
-                .orElseThrow(() -> new Exception("Schedule Id Not Found"));
+                .orElseThrow(() -> new Exception("Route not found"));
 
         LocalDateTime dueDate = LocalDateTime.now().plusHours(2);
         Booking booking = new Booking();
@@ -48,7 +48,7 @@ public class BookingService {
         booking.setDueValid(dueDate);
         booking.setIsSuccess(false);
         booking.setIsValid(true);
-        log.info("Has successfully booking ticket!");
+
         return bookingRepository.save(booking);
     }
 
@@ -73,24 +73,7 @@ public class BookingService {
                 booking.setPaymentMethod(paymentDTO.getPaymentMethod());
             }
         }
-        log.info("Has successfully make a payment!");
         return bookingRepository.save(booking);
-    }
-
-    public Booking getBookingById(Long bookingId) throws Exception {
-        log.info("Has successfully found booking by booking id!");
-        return bookingRepository.findBookingById(bookingId)
-                .orElseThrow(() -> new Exception("Booking Id Not Found"));
-    }
-
-    public List<Booking> findAllByUsersIdAndIsSuccess(Long userId, Boolean isSuccess) {
-        log.info("Has successfully found booking history by user id and success!");
-        return bookingRepository.findAllByUsersIdAndIsSuccess(userId, isSuccess);
-    }
-
-    public List<Booking> findAllByUsersId(Long userId) {
-        log.info("Has successfully found history by user id!");
-        return bookingRepository.findAllByUsersId(userId);
     }
 
     private String generateBookingCode() {
