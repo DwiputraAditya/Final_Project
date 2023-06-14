@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/passenger")
-@Tag(name = "Passenger", description = "Passenger Controller | contains : Add Passenger, Add All Passenger")
+@Tag(name = "Passenger", description = "Passenger Controller | contains : Add Passenger, //Add All Passenger")
 public class PassengerController {
 
     @Autowired

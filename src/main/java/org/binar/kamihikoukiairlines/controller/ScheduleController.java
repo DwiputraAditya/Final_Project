@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/schedule")
-@Tag(name = "Schedule", description = "Schedule Controller | contains : Add Schedule, Get All Schedule, Get Schedule By Id")
+@Tag(name = "Schedule", description = "Schedule Controller | contains : Add Schedule, Get All Schedule, Get Schedule By Id, Search Schedule")
 public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;

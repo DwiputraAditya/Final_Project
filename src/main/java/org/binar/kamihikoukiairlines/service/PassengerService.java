@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.PassengerRequest;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.model.Passenger;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class PassengerService {
 
     @Autowired
@@ -24,7 +26,7 @@ public class PassengerService {
     public Passenger addPassenger(PassengerRequest passenger) throws Exception{
 
         Booking findBooking = bookingRepository.findById(passenger.getBookingId())
-                .orElseThrow(() -> new Exception("Booking not found"));
+                .orElseThrow(() -> new Exception("Booking Not Found"));
         Passenger passenger1 = new Passenger();
         passenger1.setTitle(passenger.getTitle());
         passenger1.setName(passenger.getName());
@@ -34,7 +36,7 @@ public class PassengerService {
         passenger1.setPassport(passenger.getPassport());
         passenger1.setCountryOfPublication(passenger.getCountryOfPublication());
         passenger1.setBooking(findBooking);
-
+        log.info("Has successfully add passenger data!");
         return passengerRepository.save(passenger1);
     }
 

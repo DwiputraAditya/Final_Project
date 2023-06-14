@@ -3,7 +3,6 @@ package org.binar.kamihikoukiairlines.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.binar.kamihikoukiairlines.dto.PaymentDTO;
 import org.binar.kamihikoukiairlines.model.Booking;
-import org.binar.kamihikoukiairlines.repository.BookingRepository;
 import org.binar.kamihikoukiairlines.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,19 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.webjars.NotFoundException;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/booking")
-@Tag(name = "Booking", description = "Booking Controller | contains : Add Booking, Get All Booking")
+@Tag(name = "Booking", description = "Booking Controller | contains : Add Booking, Get All Booking, Get Booking By Id, Get History Booking By User Id, Get Booking By User Id and Success")
 public class BookingController {
     @Autowired
     private BookingService bookingService;
-
-    @Autowired
-    private BookingRepository bookingRepository;
 
     @GetMapping("/getAllBooking")
     public List<Booking> getAllBooking(){
@@ -52,6 +46,26 @@ public class BookingController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/bookingById/{bookingId}")
+    public ResponseEntity<Booking> getBookingHistoryById(@PathVariable Long bookingId) {
+        try {
+            Booking booking = bookingService.getBookingById(bookingId);
+            return ResponseEntity.ok(booking);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/successfulBookingsHistory/{userId}")
+    public List<Booking> getAllSuccessfulBookingsByUserId(@PathVariable Long userId) {
+        return bookingService.findAllByUsersIdAndIsSuccess(userId, true);
+    }
+
+    @GetMapping("/historyById/{userId}")
+    public List<Booking> getAllBookingsByUserId(@PathVariable Long userId) {
+        return bookingService.findAllByUsersId(userId);
     }
 
 }

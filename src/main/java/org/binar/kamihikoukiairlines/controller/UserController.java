@@ -47,15 +47,15 @@ public class UserController {
         return ResponseEntity.ok("Data Berhasil dihapus");
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/changePassword")
     public ResponseEntity<?> changePassword(@RequestParam("email") String email,
                                             @RequestParam("currentPassword") String currentPassword,
                                             @RequestParam("newPassword") String newPassword) {
         try {
             userService.changePassword(email, currentPassword, newPassword);
-            return ResponseEntity.ok(new MessageResponse("Password Berhasil Dirubah!"));
+            return ResponseEntity.ok(new MessageResponse("Password successfully change!"));
         } catch (UserNotFoundException e) {
-            return ResponseEntity.badRequest().body("Pengguna dengan email tersebut tidak ditemukan");
+            return ResponseEntity.badRequest().body("User With The Email Not Found");
         }
     }
 }

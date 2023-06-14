@@ -2,8 +2,6 @@ package org.binar.kamihikoukiairlines.response;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class UserInfoResponse {
     private String response;

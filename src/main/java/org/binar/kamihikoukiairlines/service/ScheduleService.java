@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.ScheduleRequest;
 import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.model.Route;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ScheduleService {
 
     @Autowired
@@ -35,7 +37,7 @@ public class ScheduleService {
     public Schedule addSchedule(ScheduleRequest scheduleRequest) throws Exception {
 
         Route findRoute = routeRepository.findById(scheduleRequest.getRouteId())
-                .orElseThrow(() -> new Exception("Route not found"));
+                .orElseThrow(() -> new Exception("Route Not Found"));
 
         Schedule schedule = new Schedule();
         schedule.setArrivalDate(scheduleRequest.getArrivalDate());
@@ -45,21 +47,23 @@ public class ScheduleService {
         schedule.setPrice(scheduleRequest.getPrice());
         schedule.setSeatClass(scheduleRequest.getSeatClass());
         schedule.setRoute(findRoute);
-
+        log.info("Has successfully add schedule data!");
         return scheduleRepository.save(schedule);
 
     }
     public List<Schedule> getAllSchedules() {
+        log.info("Has successfully found all schedule data!");
         return scheduleRepository.findAll();
     }
 
     public Optional<Schedule> getScheduleById(Long id) {
+        log.info("Has successfully found schedule data by schedule id!");
         return scheduleRepository.findById(id);
     }
 
     public Page<Schedule> searchFlightWithoutArrival(String departure, String arrival, LocalDate date, String seatClass, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-
+        log.info("Has successfully search flight data!");
         return scheduleRepository.findByDepartureAndArrivalAndDepartureDateAndSeatClass(departure, arrival, date, seatClass, pageable);
     }
 }

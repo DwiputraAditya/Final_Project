@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.model.Aircraft;
 import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.model.Route;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class RouteService {
     @Autowired
     RouteRepository routeRepository;
@@ -36,15 +38,17 @@ public class RouteService {
         route.setDeparture(departureAirport);
         route.setArrival(arrivalAirport);
         route.setAircraftDetail(aircraft);
-
+        log.info("Has successfully add route data!");
         return routeRepository.save(route);
     }
 
     public List<Route> getAllRoute(){
+        log.info("Has successfully found all route data!");
         return routeRepository.findAll();
     }
 
     public Optional<Route> getRouteById(Long id) {
+        log.info("Has successfully found route data by route id!");
         return routeRepository.findById(id);
     }
 
@@ -62,27 +66,14 @@ public class RouteService {
         route.setDeparture(departureAirport);
         route.setArrival(arrivalAirport);
         route.setAircraftDetail(aircraft);
-
+        log.info("Has successfully update route data!");
         return routeRepository.save(route);
     }
 
     public void deletRoute(Long id) {
+        log.info("Has successfully delete route data!");
         airportRepository.deleteById(id);
     }
 }
-
-//    public Route addRoute(String departure, String arrival, Long aircraftId) throws Exception {
-//        Airport keberangkatan = airportRepository.findByAirportName(departure).orElseThrow(() -> new Exception("departure Id Tidak Ada"));
-//        Airport kedatangan = airportRepository.findByAirportName(arrival).orElseThrow(() -> new Exception("Arrival Id Tidak Ada"));
-//        Aircraft aircraft = aircraftRepository.findById(aircraftId).orElseThrow(() -> new Exception("Seat Id Tidak Ada"));
-//
-//        Route route = new Route();
-//        route.setDeparture(keberangkatan);
-//        route.setArrival(kedatangan);
-//        route.setAircraftDetail(aircraft);
-//
-//        return routeRepository.save(route);
-//    }
-//
 
 

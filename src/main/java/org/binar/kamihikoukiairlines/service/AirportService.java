@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.AirportRequest;
 import org.binar.kamihikoukiairlines.model.Airport;
 import org.binar.kamihikoukiairlines.repository.AirportRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class AirportService {
     @Autowired
     AirportRepository airportRepository;
@@ -20,6 +22,7 @@ public class AirportService {
 
 
     public List<Airport> getAllAirport() {
+        log.info("Has successfully found all airport data!");
         return airportRepository.findAll();
     }
 
@@ -31,7 +34,7 @@ public class AirportService {
         airport.setCityCode(airportRequest.getCityCode());
         airport.setCountryName(airportRequest.getCountryName());
         airport.setCountryCode(airportRequest.getCountryCode());
-
+        log.info("Has successfully add airport data!");
         return airportRepository.save(airport);
     }
 
@@ -43,10 +46,12 @@ public class AirportService {
         tempat.setCityName(airport.getCityName());
         tempat.setCountryCode(airport.getCountryCode());
         tempat.setCityName(airport.getCityName());
+        log.info("Has successfully update airport data!");
         return airportRepository.save(tempat);
     }
 
     public void deletAirport(Long id) {
+        log.info("Has successfully delete airport data!");
         airportRepository.deleteById(id);
     }
 }

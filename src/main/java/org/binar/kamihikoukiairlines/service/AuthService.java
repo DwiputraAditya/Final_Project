@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.binar.kamihikoukiairlines.dto.LoginRequest;
 import org.binar.kamihikoukiairlines.dto.SignupRequest;
 import org.binar.kamihikoukiairlines.jwt.AuthenticationResponse;
@@ -24,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class AuthService {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -40,7 +42,6 @@ public class AuthService {
     @Autowired
     JwtUtils jwtUtils;
 
-//    sign in
     public AuthenticationResponse loginUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -64,14 +65,11 @@ public class AuthService {
                 jwtCookie.getValue());
     }
 
-
-//    sign up
     public void registerUser(SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new IllegalArgumentException("Error: Email is already in use!");
         }
 
-        // Create new user's account
         Users user = new Users(signUpRequest.getName(),
                 signUpRequest.getEmail(),
                 signUpRequest.getPhoneNumber(),

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/route")
-@Tag(name = "Route", description = "Route Controller | contains : Add Route, Get All Route, Update Route, Delete Route")
+@Tag(name = "Route", description = "Route Controller | contains : Add Route, Get All Route, Get Route By Id, Update Route, Delete Route")
 public class RouteController {
     @Autowired
     RouteService routeService;
