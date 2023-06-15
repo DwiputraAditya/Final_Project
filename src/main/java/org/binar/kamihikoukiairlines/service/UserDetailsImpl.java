@@ -72,6 +72,10 @@ public class UserDetailsImpl implements UserDetails {
         return email;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getPhoneNumber(){
         return phoneNumber;
     }

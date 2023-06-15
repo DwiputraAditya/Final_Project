@@ -30,6 +30,7 @@ public class BookingService {
 
 
     public List<Booking> getAllBooking(){
+        log.info("Has successfully found all booking ticket!");
         return bookingRepository.findAll();
     }
 
@@ -91,6 +92,10 @@ public class BookingService {
     public List<Booking> findAllByUsersId(Long userId) {
         log.info("Has successfully found history by user id!");
         return bookingRepository.findAllByUsersId(userId);
+    }
+
+    public Booking findBookingByBookingCode(String bookingCode) {
+        return bookingRepository.findBookingByBookingCode(bookingCode);
     }
 
     private String generateBookingCode() {

@@ -57,10 +57,10 @@ public class AuthService {
                 .collect(Collectors.toList());
 
         return new AuthenticationResponse(userDetails.getId(),
+                userDetails.getName(),
                 userDetails.getEmail(),
                 userDetails.getPassword(),
                 userDetails.getPhoneNumber(),
-                userDetails.getPassword(),
                 roles,
                 jwtCookie.getValue());
     }

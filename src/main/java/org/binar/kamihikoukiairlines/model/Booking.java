@@ -30,7 +30,7 @@ public class Booking {
     private Boolean isSuccess;
     private Boolean isValid;
 
-    /*@OneToMany(cascade = CascadeType.ALL)
+    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id")
     @Column(name = "passenger")
     private List<Passenger> passengersList = new ArrayList<>();*/

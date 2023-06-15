@@ -68,4 +68,14 @@ public class BookingController {
         return bookingService.findAllByUsersId(userId);
     }
 
+    @GetMapping("/getHistoryByBookingCode/{bookingCode}")
+    public ResponseEntity<Booking> findBookingByBookingCode(@PathVariable String bookingCode) {
+        Booking booking = bookingService.findBookingByBookingCode(bookingCode);
+        if (booking != null) {
+            return ResponseEntity.ok(booking);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
