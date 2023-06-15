@@ -1,5 +1,6 @@
 package org.binar.kamihikoukiairlines.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,6 @@ public class Passenger {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "booking_id")
+    @JsonIgnore
     private Booking booking;
 }
