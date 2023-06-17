@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -38,25 +39,14 @@ public class UserService {
     }
 
     @Transactional
-    public void changePassword(String email, String currentPassword, String newPassword) throws UserNotFoundException {
+    public void changePassword( String email, String newPassword) throws UserNotFoundException {
         Users user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User With The Email Not Found"));
         if (user == null) {
             throw new UserNotFoundException("User With The Email Not Found");
         }
-
-        if (!isPasswordValid(user, currentPassword)) {
-            new MessageResponse("Password Not Valid");
-        }
-
         user.setPassword(encryptPassword(newPassword));
         userRepository.save(user);
-    }
-
-    @Transactional
-    public boolean isPasswordValid(Users user, String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder.matches(user.getPassword(), password);
     }
 
     private String encryptPassword(String password) {

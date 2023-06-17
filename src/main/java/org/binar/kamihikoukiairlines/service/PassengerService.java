@@ -42,11 +42,9 @@ public class PassengerService {
             passenger.setCountryOfPublication(passengerRequest.getCountryOfPublication());
             passengers.add(passenger);
         }
-        // Simpan penumpang ke dalam penyimpanan
+        log.info("Has successfully add passengers data!");
         return passengerRepository.saveAll(passengers);
     }
-
-
 
     /*@Transactional
     public List<Passenger> addPassengers(List<PassengerRequest> passengers) throws Exception {

@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Users", description = "User Controller | contains : Get by Id, Update profile user, Change Password, Delete user")
 public class UserController {
     @Autowired
@@ -47,12 +48,11 @@ public class UserController {
         return ResponseEntity.ok("Data Berhasil dihapus");
     }
 
-    @PutMapping("/changePassword")
+    @PutMapping("/resetPassword")
     public ResponseEntity<?> changePassword(@RequestParam("email") String email,
-                                            @RequestParam("currentPassword") String currentPassword,
                                             @RequestParam("newPassword") String newPassword) {
         try {
-            userService.changePassword(email, currentPassword, newPassword);
+            userService.changePassword(email, newPassword);
             return ResponseEntity.ok(new MessageResponse("Password successfully change!"));
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body("User With The Email Not Found");

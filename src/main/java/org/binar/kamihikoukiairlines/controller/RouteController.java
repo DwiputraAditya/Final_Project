@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/route")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Route", description = "Route Controller | contains : Add Route, Get All Route, Get Route By Id, Update Route, Delete Route")
 public class RouteController {
     @Autowired

@@ -59,13 +59,13 @@ public class WebSecurityConfig {
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/api/booking/**").permitAll()
+                .antMatchers("/api/invoice/**").permitAll()
                 .antMatchers("/api/schedule/**").permitAll()
                 .antMatchers("/api/passenger/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/aircraft/**").permitAll()
                 .antMatchers("/api/airport/**").permitAll()
                 .antMatchers("/api/route/**").permitAll()
-                .antMatchers("/api/transaction/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

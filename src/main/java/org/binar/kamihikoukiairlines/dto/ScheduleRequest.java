@@ -26,7 +26,7 @@ public class ScheduleRequest {
     @JsonProperty(defaultValue = "00:00:00")
     private LocalTime arrivalTime;
 
-    private Integer passengerCount;
+//    private Integer passengerCount;
 
     private String price;
 

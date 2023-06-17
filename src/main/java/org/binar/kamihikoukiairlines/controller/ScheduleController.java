@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/schedule")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Schedule", description = "Schedule Controller | contains : Add Schedule, Get All Schedule, Get Schedule By Id, Search Schedule")
 public class ScheduleController {
     @Autowired

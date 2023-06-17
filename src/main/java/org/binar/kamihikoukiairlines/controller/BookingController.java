@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/booking")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Booking", description = "Booking Controller | contains : Add Booking, Get All Booking, Get Booking By Id, Get History Booking By User Id, Get Booking By User Id and Success")
 public class BookingController {
     @Autowired

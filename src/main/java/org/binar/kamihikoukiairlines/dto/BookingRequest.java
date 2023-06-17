@@ -15,6 +15,6 @@ public class BookingRequest {
     @NotBlank
     private Long scheduleId;
     @NotBlank
-    private List<Long> passagerId;
+    private List<Long> passengerId;
 
 }

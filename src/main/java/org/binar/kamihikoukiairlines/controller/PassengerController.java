@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/passenger")
+@CrossOrigin(origins = "http://localhost:3000")
 @Tag(name = "Passenger", description = "Passenger Controller | contains : Add Passenger, //Add All Passenger")
 public class PassengerController {
 

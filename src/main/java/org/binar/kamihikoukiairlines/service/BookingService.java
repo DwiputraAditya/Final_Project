@@ -68,7 +68,7 @@ public class BookingService {
                 .orElseThrow(() -> new Exception("Schedule not found"));
 
         // Mendapatkan data penumpang berdasarkan ID yang diberikan
-        List<Passenger> passengers = passengerRepository.findAllById(bookingRequest.getPassagerId());
+        List<Passenger> passengers = passengerRepository.findAllById(bookingRequest.getPassengerId());
 
         // Membuat objek Booking
         LocalDateTime dueDate = LocalDateTime.now().plusHours(2);
@@ -81,9 +81,7 @@ public class BookingService {
         booking.setIsSuccess(false);
         booking.setIsValid(true);
 
-        // Lakukan proses lainnya untuk booking, seperti mengatur metode pembayaran, dll.
-
-        // Menyimpan data booking ke dalam database
+        log.info("Has successfully add booking data!");
         return bookingRepository.save(booking);
     }
 
@@ -130,6 +128,7 @@ public class BookingService {
     }
 
     public Booking findBookingByBookingCode(String bookingCode) {
+        log.info("Has successfully found booking by booking code!");
         return bookingRepository.findBookingByBookingCode(bookingCode);
     }
 
