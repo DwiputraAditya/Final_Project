@@ -29,22 +29,24 @@ public class PassengerService {
     }
 
     @Transactional
-    public Passenger addPassenger(PassengerRequest passenger) throws Exception{
-
-        Booking findBooking = bookingRepository.findById(passenger.getBookingId())
-                .orElseThrow(() -> new Exception("Booking Not Found"));
-        Passenger passenger1 = new Passenger();
-        passenger1.setTitle(passenger.getTitle());
-        passenger1.setName(passenger.getName());
-        passenger1.setSurname(passenger.getSurname());
-        passenger1.setBirthday(passenger.getBirthday());
-        passenger1.setCitizenship(passenger.getCitizenship());
-        passenger1.setPassport(passenger.getPassport());
-        passenger1.setCountryOfPublication(passenger.getCountryOfPublication());
-        passenger1.setBooking(findBooking);
-        log.info("Has successfully add passenger data!");
-        return passengerRepository.save(passenger1);
+    public List<Passenger> addPassengers(List<PassengerRequest> passengerRequests) throws Exception {
+        List<Passenger> passengers = new ArrayList<>();
+        for (PassengerRequest passengerRequest : passengerRequests) {
+            Passenger passenger = new Passenger();
+            passenger.setTitle(passengerRequest.getTitle());
+            passenger.setName(passengerRequest.getName());
+            passenger.setSurname(passengerRequest.getSurname());
+            passenger.setBirthday(passengerRequest.getBirthday());
+            passenger.setCitizenship(passengerRequest.getCitizenship());
+            passenger.setPassport(passengerRequest.getPassport());
+            passenger.setCountryOfPublication(passengerRequest.getCountryOfPublication());
+            passengers.add(passenger);
+        }
+        // Simpan penumpang ke dalam penyimpanan
+        return passengerRepository.saveAll(passengers);
     }
+
+
 
     /*@Transactional
     public List<Passenger> addPassengers(List<PassengerRequest> passengers) throws Exception {

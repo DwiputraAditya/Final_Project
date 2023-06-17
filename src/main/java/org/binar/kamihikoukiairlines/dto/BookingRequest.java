@@ -5,13 +5,16 @@ import org.binar.kamihikoukiairlines.model.Schedule;
 import org.binar.kamihikoukiairlines.model.Users;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 public class BookingRequest {
 
     @NotBlank
-    private Users users;
+    private Long usersId;
     @NotBlank
-    private Schedule scheduleId;
+    private Long scheduleId;
+    @NotBlank
+    private List<Long> passagerId;
 
 }

@@ -1,6 +1,7 @@
 package org.binar.kamihikoukiairlines.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.binar.kamihikoukiairlines.dto.BookingRequest;
 import org.binar.kamihikoukiairlines.dto.PaymentDTO;
 import org.binar.kamihikoukiairlines.model.Booking;
 import org.binar.kamihikoukiairlines.service.BookingService;
@@ -25,10 +26,9 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public ResponseEntity<Booking> bookTicket(@RequestParam("user_id") Long userId,
-                                              @RequestParam("schedule_id") Long scheduleId) {
+    public ResponseEntity<Booking> bookTicket(@RequestBody BookingRequest bookingRequest) {
         try {
-            Booking newBooking = bookingService.bookTicket(userId, scheduleId);
+            Booking newBooking = bookingService.createBooking(bookingRequest);
             return ResponseEntity.ok(newBooking);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

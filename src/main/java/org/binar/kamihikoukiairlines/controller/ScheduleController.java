@@ -51,10 +51,11 @@ public class ScheduleController {
     public ResponseEntity<Page<Schedule>> searchFlightWithoutArrival(@RequestParam("departure") String departure,
                                                                      @RequestParam("arrival") String arrival,
                                                                      @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                                                     @RequestParam("passenger") Integer seatAvailable,
                                                                      @RequestParam("seatClass") String seatClass,
                                                                      @RequestParam(value = "page", defaultValue = "0") int page,
                                                                      @RequestParam(value = "size", defaultValue = "10") int size){
-        Page<Schedule> flights = scheduleService.searchFlightWithoutArrival(departure, arrival, date, seatClass, page, size);
+        Page<Schedule> flights = scheduleService.searchFlightWithoutArrival(departure, arrival, date, seatAvailable, seatClass, page, size);
         return ResponseEntity.ok(flights);
     }
 

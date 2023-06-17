@@ -13,6 +13,5 @@ public class PassengerRequest {
     private String citizenship;
     private String passport;
     private String countryOfPublication;
-    private Long bookingId;
 
 }

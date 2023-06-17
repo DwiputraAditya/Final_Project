@@ -25,13 +25,23 @@ public class PassengerController {
         return passengerService.getAllPassenger();
     }
 
-    @PostMapping("/addPassenger")
-    public ResponseEntity<?> addPassenger(@RequestBody PassengerRequest passengerRequest) {
+//    @PostMapping("/addPassenger")
+//    public ResponseEntity<?> addPassenger(@RequestBody PassengerRequest passengerRequest) {
+//        try {
+//            Passenger newPassenger = passengerService.addPassenger(passengerRequest);
+//            return ResponseEntity.ok(newPassenger);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//        }
+//    }
+
+    @PostMapping("/add")
+    public ResponseEntity<List<Passenger>> addPassengers(@RequestBody List<PassengerRequest> passengerRequests) {
         try {
-            Passenger newPassenger = passengerService.addPassenger(passengerRequest);
-            return ResponseEntity.ok(newPassenger);
+            List<Passenger> passengers = passengerService.addPassengers(passengerRequests);
+            return ResponseEntity.ok(passengers);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok("Data Berhasil dihapus");
     }
 
-    @PostMapping("/changePassword")
+    @PutMapping("/changePassword")
     public ResponseEntity<?> changePassword(@RequestParam("email") String email,
                                             @RequestParam("currentPassword") String currentPassword,
                                             @RequestParam("newPassword") String newPassword) {

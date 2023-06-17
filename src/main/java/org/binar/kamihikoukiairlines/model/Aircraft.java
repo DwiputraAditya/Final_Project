@@ -19,4 +19,6 @@ public class Aircraft {
     private Long id;
 
     private String aircraftName;
+
+    private Integer seatCapacity;
 }

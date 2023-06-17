@@ -20,9 +20,11 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private Users users;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
     private String bookingCode;
     private String paymentMethod;
@@ -31,7 +33,10 @@ public class Booking {
     private Boolean isValid;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "booking_id")
-    @Column(name = "passenger")
+    @JoinTable(
+            name = "booking_passenger",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
+    )
     private List<Passenger> passengersList = new ArrayList<>();
 }
