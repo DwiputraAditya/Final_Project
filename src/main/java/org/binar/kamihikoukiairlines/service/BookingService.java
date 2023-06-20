@@ -39,7 +39,6 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    @Transactional
 //    public Booking bookTicket(Long userId, Long scheduleId) throws Exception {
 //        Users users = userRepository.findById(userId)
 //                .orElseThrow(() -> new Exception("User Id Not Found"));
@@ -58,6 +57,7 @@ public class BookingService {
 //        return bookingRepository.save(booking);
 //    }
 
+    @Transactional
     public Booking createBooking(BookingRequest bookingRequest) throws Exception {
         // Mendapatkan data pengguna berdasarkan ID
         Users user = userRepository.findById(bookingRequest.getUsersId())

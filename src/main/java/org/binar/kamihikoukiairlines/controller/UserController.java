@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:3000")
-@Tag(name = "Users", description = "User Controller | contains : Get by Id, Update profile user, Change Password, Delete user")
+@Tag(name = "Users", description = "User Controller | contains : Get by Id, Update profile user, Reset Password, Delete user")
 public class UserController {
     @Autowired
     UserService userService;

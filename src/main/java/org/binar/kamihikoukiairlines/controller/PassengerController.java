@@ -15,28 +15,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/passenger")
 @CrossOrigin(origins = "http://localhost:3000")
-@Tag(name = "Passenger", description = "Passenger Controller | contains : Add Passenger, //Add All Passenger")
+@Tag(name = "Passenger", description = "Passenger Controller | contains : Add Passengers/Add All Passenger")
 public class PassengerController {
 
     @Autowired
     PassengerService passengerService;
 
-    @GetMapping
-    public List<Passenger> getALlSchedule(){
+    @GetMapping("/getAllPassengers")
+    public List<Passenger> getAllPassengers(){
         return passengerService.getAllPassenger();
     }
 
-//    @PostMapping("/addPassenger")
-//    public ResponseEntity<?> addPassenger(@RequestBody PassengerRequest passengerRequest) {
-//        try {
-//            Passenger newPassenger = passengerService.addPassenger(passengerRequest);
-//            return ResponseEntity.ok(newPassenger);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//        }
-//    }
-
-    @PostMapping("/add")
+    @PostMapping("/addPassengers")
     public ResponseEntity<List<Passenger>> addPassengers(@RequestBody List<PassengerRequest> passengerRequests) {
         try {
             List<Passenger> passengers = passengerService.addPassengers(passengerRequests);
@@ -45,21 +35,4 @@ public class PassengerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    /*@PostMapping("/addAllPassengers")
-    public ResponseEntity<List<Passenger>> addAllPassengers(@RequestBody List<PassengerRequest> passengers) {
-        try {
-            List<Passenger> addedPassengers = passengerService.addPassengers(passengers);
-            return ResponseEntity.ok().body(addedPassengers);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }*/
-
-    /*@PostMapping("/addPassenger")
-    public ResponseEntity<List<Passenger>> addAllPassenger(@RequestBody List<Passenger> passengers) {
-        List<Passenger> allPassengers = passengerService.addAllPassenger(passengers);
-        return ResponseEntity.ok(allPassengers);
-    }*/
-
 }
