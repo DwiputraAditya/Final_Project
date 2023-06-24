@@ -25,11 +25,12 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
             Pageable pageable);*/
 
     @Query("SELECT s FROM Schedule s JOIN s.route r WHERE r.departure.cityName = :departure AND r.arrival.cityName = :arrival AND r.aircraftDetail.seatCapacity >= :seatAvailable AND s.departureDate = :departureDate AND s.seatClass = :seatClass")
-    List<Schedule> findByDepartureAndArrivalAndDepartureDateAndSeatClass(
+    Page<Schedule> findByDepartureAndArrivalAndDepartureDateAndSeatClass(
             @Param("departure") String departure,
             @Param("arrival") String arrival,
             @Param("departureDate") LocalDate departureDate,
             @Param("seatAvailable") Integer seatAvailable,
-            @Param("seatClass") String seatClass);
+            @Param("seatClass") String seatClass,
+            Pageable pageable);
 
 }

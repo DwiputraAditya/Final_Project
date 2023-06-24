@@ -49,12 +49,14 @@ public class ScheduleController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Schedule>> searchFlightWithoutArrival(@RequestParam("departure") String departure,
+    public ResponseEntity<Page<Schedule>> searchFlightWithoutArrival(@RequestParam("departure") String departure,
                                                                      @RequestParam("arrival") String arrival,
                                                                      @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
                                                                      @RequestParam("passenger") Integer seatAvailable,
-                                                                     @RequestParam("seatClass") String seatClass){
-        List<Schedule> flights = scheduleService.searchFlightWithoutArrival(departure, arrival, date, seatAvailable, seatClass);
+                                                                     @RequestParam("seatClass") String seatClass,
+                                                                     @RequestParam(value = "page", defaultValue = "0") int page,
+                                                                     @RequestParam(value = "size", defaultValue = "10") int size){
+        Page<Schedule> flights = scheduleService.searchFlightWithoutArrival(departure, arrival, date, seatAvailable, seatClass, page, size);
         return ResponseEntity.ok(flights);
     }
 

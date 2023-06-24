@@ -61,9 +61,9 @@ public class ScheduleService {
         return scheduleRepository.findById(id);
     }
 
-    public List<Schedule> searchFlightWithoutArrival(String departure, String arrival, LocalDate date, Integer seatAvailable,  String seatClass) {
-//        Pageable pageable = PageRequest.of(page, size);
+    public Page<Schedule> searchFlightWithoutArrival(String departure, String arrival, LocalDate date, Integer seatAvailable,  String seatClass, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         log.info("Has successfully search flight data!");
-        return scheduleRepository.findByDepartureAndArrivalAndDepartureDateAndSeatClass(departure, arrival, date, seatAvailable, seatClass);
+        return scheduleRepository.findByDepartureAndArrivalAndDepartureDateAndSeatClass(departure, arrival, date, seatAvailable, seatClass, pageable);
     }
 }
