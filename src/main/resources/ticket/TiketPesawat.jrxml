@@ -134,7 +134,7 @@ FROM booking
 				<staticText>
 					<reportElement x="40" y="0" width="370" height="61" forecolor="#FFFFFF" uuid="9cc9ee2c-20a5-441c-b1ae-7a5d7fb8bef2"/>
 					<textElement textAlignment="Center">
-						<font fontName="Times New Roman" size="43" isBold="false" isItalic="true"/>
+						<font fontName="SansSerif" size="43" isBold="false" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[kamihikoukiairlines]]></text>
 				</staticText>
@@ -340,7 +340,7 @@ Kode Booking Maskapai (PNR)]]></text>
 		</band>
 		<band height="108">
 			<staticText>
-				<reportElement mode="Opaque" x="90" y="15" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="403fa979-7cf4-4985-888a-e3295d9986db"/>
+				<reportElement mode="Opaque" x="60" y="20" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="403fa979-7cf4-4985-888a-e3295d9986db"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="false" isItalic="false"/>
 				</textElement>
@@ -349,7 +349,7 @@ identitas para penumpang
 saat check in]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="364" y="15" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="812fb39a-cfaa-45ff-91df-81c57457ef97"/>
+				<reportElement mode="Opaque" x="334" y="20" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="812fb39a-cfaa-45ff-91df-81c57457ef97"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="false" isItalic="false"/>
 				</textElement>
@@ -358,7 +358,7 @@ saat check in]]></text>
 keberangkatan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="630" y="15" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="b518e9d4-437e-494b-96e7-9f824737ab3a"/>
+				<reportElement mode="Opaque" x="600" y="20" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="b518e9d4-437e-494b-96e7-9f824737ab3a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="false" isItalic="false"/>
 				</textElement>
@@ -372,25 +372,11 @@ bandara setempat]]></text>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="-20" y="99" width="842" height="1" uuid="0692e761-b230-46b9-94fa-4604bb5e3dc6"/>
+				<reportElement x="-20" y="107" width="842" height="1" uuid="0692e761-b230-46b9-94fa-4604bb5e3dc6"/>
 				<graphicElement>
 					<pen lineWidth="2.0"/>
 				</graphicElement>
 			</line>
-			<image>
-				<reportElement x="580" y="30" width="35" height="35" uuid="39f32532-f146-433f-a1d0-bc320666e26a">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<imageExpression><![CDATA["C:/Users/User/Downloads/danger.jpg"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="299" y="30" width="60" height="59" uuid="a2c7e807-80ae-465a-84b7-1f21be12c47c"/>
-				<imageExpression><![CDATA["C:/Users/User/Downloads/jam.jpg"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement mode="Transparent" x="15" y="28" width="69" height="52" uuid="cdade127-d769-476e-8a70-94351ca68e25"/>
-				<imageExpression><![CDATA["C:/Users/User/Downloads/pesawat.png"]]></imageExpression>
-			</image>
 		</band>
 		<band height="120">
 			<textField>
