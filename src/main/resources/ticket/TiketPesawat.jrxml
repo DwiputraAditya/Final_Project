@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TiketPesawat" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2cd7d75c-db16-40a6-953a-bef37be02055">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TiketPesawat" pageWidth="842" pageHeight="550" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2cd7d75c-db16-40a6-953a-bef37be02055">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="bookingId" class="java.lang.Long"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT booking.booking_code,
@@ -116,8 +125,10 @@ FROM booking
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="96" splitType="Stretch">
+	<detail>
+		<band height="96" splitType="Immediate">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
 				<reportElement mode="Opaque" x="370" y="0" width="455" height="60" backcolor="#006699" uuid="c1d05344-4138-483a-9b98-95687353d561"/>
 				<staticText>
@@ -133,7 +144,7 @@ FROM booking
 				<textElement textAlignment="Left">
 					<font size="22" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[E-Ticket / ]]></text>
+				<text><![CDATA[E-Ticket /]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="120" y="20" width="79" height="30" forecolor="#030303" backcolor="#FFFFFF" uuid="066bfe10-6630-4fd6-a9d2-5691bbe1d091"/>
@@ -143,7 +154,7 @@ FROM booking
 				<text><![CDATA[E-Tiket]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="630" y="61" width="150" height="30" forecolor="#030303" backcolor="#FFFFFF" uuid="bd9d95ef-f613-4db6-8dd8-54457c2bee49"/>
+				<reportElement mode="Transparent" x="630" y="61" width="150" height="30" forecolor="#030303" backcolor="#FFFFFF" uuid="bd9d95ef-f613-4db6-8dd8-54457c2bee49"/>
 				<textElement textAlignment="Left">
 					<font size="22" isBold="false" isItalic="false"/>
 				</textElement>
@@ -156,13 +167,17 @@ FROM booking
 				</textElement>
 				<text><![CDATA[Departure Flight / Penerbangan Pergi]]></text>
 			</staticText>
+			<line>
+				<reportElement x="-20" y="91" width="842" height="1" uuid="14971224-6574-45f8-b5a9-42ce19f26b9f"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
 		</band>
-	</title>
-	<detail>
-		<band height="172" splitType="Immediate">
-			<property name="com.jaspersoft.studio.layout"/>
+		<band height="172">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="685" y="70" width="101" height="30" uuid="5d622dd1-5e0c-4e58-809a-d13dd37e7324">
+				<reportElement x="655" y="71" width="101" height="30" uuid="5d622dd1-5e0c-4e58-809a-d13dd37e7324">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d0ee1cf-e0ba-428f-89d9-dee99c9b024e"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -285,12 +300,6 @@ FROM booking
 				</textElement>
 				<text><![CDATA[/]]></text>
 			</staticText>
-			<line>
-				<reportElement x="-20" y="0" width="842" height="1" uuid="14971224-6574-45f8-b5a9-42ce19f26b9f"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
 			<staticText>
 				<reportElement mode="Transparent" x="20" y="80" width="59" height="30" forecolor="#030303" backcolor="#FFFFFF" uuid="22056afc-f43a-4e06-983c-4df54e1b8ac7"/>
 				<textElement textAlignment="Left">
@@ -321,7 +330,7 @@ FROM booking
 				</graphicElement>
 			</ellipse>
 			<staticText>
-				<reportElement mode="Transparent" x="660" y="30" width="150" height="42" forecolor="#030303" backcolor="#FFFFFF" uuid="0538ca07-05e6-43f1-a3c2-82953631dfad"/>
+				<reportElement mode="Transparent" x="630" y="31" width="150" height="42" forecolor="#030303" backcolor="#FFFFFF" uuid="0538ca07-05e6-43f1-a3c2-82953631dfad"/>
 				<textElement textAlignment="Left">
 					<font size="12" isBold="false" isItalic="false"/>
 				</textElement>
@@ -329,7 +338,7 @@ FROM booking
 Kode Booking Maskapai (PNR)]]></text>
 			</staticText>
 		</band>
-		<band height="110">
+		<band height="108">
 			<staticText>
 				<reportElement mode="Opaque" x="90" y="15" width="146" height="68" forecolor="#030303" backcolor="#E0A7A6" uuid="403fa979-7cf4-4985-888a-e3295d9986db"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -375,23 +384,82 @@ bandara setempat]]></text>
 				<imageExpression><![CDATA["C:/Users/User/Downloads/danger.jpg"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="304" y="31" width="60" height="59" uuid="a2c7e807-80ae-465a-84b7-1f21be12c47c"/>
+				<reportElement x="299" y="30" width="60" height="59" uuid="a2c7e807-80ae-465a-84b7-1f21be12c47c"/>
 				<imageExpression><![CDATA["C:/Users/User/Downloads/jam.jpg"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement mode="Transparent" x="10" y="28" width="80" height="52" uuid="cdade127-d769-476e-8a70-94351ca68e25"/>
+				<reportElement mode="Transparent" x="15" y="28" width="69" height="52" uuid="cdade127-d769-476e-8a70-94351ca68e25"/>
 				<imageExpression><![CDATA["C:/Users/User/Downloads/pesawat.png"]]></imageExpression>
 			</image>
 		</band>
-		<band height="40">
+		<band height="120">
 			<textField>
-				<reportElement x="90" y="10" width="100" height="30" uuid="99f836cf-0c08-4c83-9530-499a13b2bc93"/>
+				<reportElement x="295" y="66" width="100" height="30" uuid="99f836cf-0c08-4c83-9530-499a13b2bc93"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{passenger_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="10" width="100" height="30" uuid="69ccbb0c-2275-46f9-9e22-828c444d8e51"/>
+				<reportElement x="265" y="66" width="100" height="30" uuid="69ccbb0c-2275-46f9-9e22-828c444d8e51"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="139" y="55" width="139" height="41" forecolor="#030303" backcolor="#FFFFFF" uuid="e46abcfe-503c-4080-a410-0d086d68b2da"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Passenger (s)
+Nama Penumpang]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="610" y="66" width="50" height="30" uuid="98f30811-8939-4dad-b8a3-4e15b6a2138b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9bd722b0-2348-4dfb-8f16-12fa88f47f0e"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="561" y="66" width="49" height="30" uuid="1bcbc0f8-2393-4b4c-84af-ab7abf3757f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4757bc7b-37f0-4cbb-85b4-cd790b03d333"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_15}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="581" y="63" width="20" height="36" forecolor="#030303" backcolor="#FFFFFF" uuid="6b02e1bd-fc59-40b9-b7b1-fc74f7a31710"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="490" y="55" width="89" height="41" forecolor="#030303" backcolor="#FFFFFF" uuid="a3ed1721-8d93-4944-85dc-a48052f8835c"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Route
+Rute]]></text>
+			</staticText>
+			<line>
+				<reportElement x="249" y="51" width="1" height="42" uuid="5276b721-068e-4a55-9975-740f30d9e8d3"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="539" y="51" width="1" height="42" uuid="920ba4b7-7e94-490a-aa7d-4511369994c2"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
 		</band>
 	</detail>
 </jasperReport>
